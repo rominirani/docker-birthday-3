@@ -227,13 +227,13 @@ Note: A cool feature is that you do not need to specify the entire `CONTAINER ID
 Now, let us launch a container in **detached** mode as shown below:
 
 ```
-$ docker run --name static-site -e AUTHOR="Your_Name" -d -P seqvence/static-site
+$ docker run --name static-site -e AUTHOR="Your Name" -d -P seqvence/static-site
 e61d12292d69556eabe2a44c16cbd54486b2527e2ce4f95438e504afb7b02810
 ```
 
-In the above command, `-d` will create a container with the process detached from our terminal, `-P` will publish all the exposed container ports to random ports on the Docker host, `-e` is how you pass environment variables to the container, and finally `--name` allows you tp specify a container name. `AUTHOR` is the environment variable name and `Your_Name` is the value that you can pass (ensure there are no spaces in the `Your_Name` value).
+In the above command, `-d` will create a container with the process detached from our terminal, `-P` will publish all the exposed container ports to random ports on the Docker host, `-e` is how you pass environment variables to the container, and finally `--name` allows you to specify a container name. `AUTHOR` is the environment variable name and `Your Name` is the value that you can pass.
 
-Now you can see the ports by running the `docker port` command.  
+Now you can see the ports by running the `docker port` command.
 
 ```
 $ docker port static-site
@@ -343,8 +343,6 @@ Start by creating a folder ```flask-app``` where we'll create the following file
 - templates/index.html
 ```
 
-*The application directory does contain a Dockerfile but since we're doing this for the first time, we'll create one from scratch. To start, create a new blank file in our favorite text-editor and save it in the same folder as the flask app by the name of `Dockerfile`.*
-
 Create the **app.py** with the following content:
 
 ```
@@ -416,9 +414,10 @@ Create `directory` templates and create a **index.html** file in that directory,
 </html>
 ```
 
-The next step now is to create a Docker image with this web app. As mentioned above, all user images are based off a base image. Since our application is written in Python, the base image we're going to use will be [Python 3](https://hub.docker.com/_/python/). We'll do that using a **Dockerfile**.
+The next step now is to create a Docker image with this web app. As mentioned above, all user images are based off a base image. Since our application is written in Python, we will build our own Python image based on [Alpine](https://hub.docker.com/_/alpine/). We'll do that using a **Dockerfile**.
 
-Open Dockerfile. Now start by specifying our base image. Use the `FROM` keyword to do that
+Create a file **Dockerfile**.
+Start by specifying our base image. Use the `FROM` keyword to do that
 
 ```
 FROM alpine:latest
@@ -735,7 +734,7 @@ $ docker-compose up -d
 ```
 This tells Compose to run the `docker-compose.yml` file in that directory. The `-d` tells it to run them in daemon mode, in the background.
 
-Last you'll need to figure out the ip address of your containers. If you're running Linux, it's just localhost, or 0.0.0.0. If you're using Docker Machine on Mac or Windows, you'll need to run:
+Last you'll need to figure out the ip address of your containers. If you're running Linux, it's just localhost, or 127.0.0.1. If you're using Docker Machine on Mac or Windows, you'll need to run:
 
 ```
 $ docker-machine ip default
