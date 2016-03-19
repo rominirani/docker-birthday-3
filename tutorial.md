@@ -93,7 +93,7 @@ To get started, let's run the following in our terminal:
 $ docker pull alpine
 ```
 
-> Note: Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. If you're on a Mac, make sure the Docker engine is running. If you're on Linux, then prefix your `docker` commands with `sudo`. Alternatively you can [create a docker group](http://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group) to get rid of this issue.
+> Note: Depending on how you've installed docker on your system, you might see a `permission denied` error after running the above command. If you're on a Mac, [verify your installation](https://docs.docker.com/mac/step_one/). If you're on Linux, you may need to prefix your `docker` commands with `sudo`. Alternatively you can [create a docker group](http://docs.docker.com/engine/installation/ubuntulinux/#create-a-docker-group) to get rid of this issue.
 
 The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in our system. You can use the `docker images` command to see a list of all images on your system.
 ```
@@ -443,7 +443,7 @@ Copy the files you have created earlier our image by using [COPY](https://docs.d
 
 ```
 COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates
+COPY templates/index.html /usr/src/app/templates/
 ```
 
 The next thing you need to specify is the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
@@ -723,7 +723,7 @@ This Compose file defines
 - A Java based worker app based on a Java image
 - A Postgres container based on a postgres image
 
-Note that three of the containers are build from Dockerfiles, while the other two are images on Docker Hub. To learn more about how they're built, you can examine each of the Dockerfiles in the three directories: `voting-app`, `result-app`, `worker`.
+Note that two of the containers are build from Dockerfiles, while the other three are images on Docker Hub. To learn more about how they're built, you can examine each of the Dockerfiles in the two directories: `voting-app`, `result-app`. We included the code for the Java worker in `worker` but pre-built the image to save on downloads.
 
 The Compose file also defines two networks, front-tier and back-tier. Each container is placed on one or two networks. Once on those networks, they can access other services on that network in code just by using the name of the service. To learn more about networking check out the [Networking with Compose documentation](https://docs.docker.com/compose/networking/).
 
